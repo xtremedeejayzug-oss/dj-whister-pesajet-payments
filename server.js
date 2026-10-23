@@ -5,6 +5,21 @@ const crypto = require("node:crypto");
 
 const app = express();
 app.set("trust proxy", 1);
+// Fix browser requests from the DJ WHISTER website
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Webhook-Signature"
+  );
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
 
 const requiredEnv = ["PESAJET_API_KEY", "PESAJET_WEBHOOK_SIGNING_SECRET", "SUPABASE_URL", "SUPABASE_ANON_KEY", "SUPABASE_SERVICE_ROLE_KEY"];
 const missing = requiredEnv.filter((key) => !process.env[key]);
