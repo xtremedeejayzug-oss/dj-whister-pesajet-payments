@@ -1,0 +1,14 @@
+{
+  "name": "dj-whister-pesajet-payments",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DJ WHISTER 256 PesaJet mobile-money payment backend",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@pesajet/sdk": "^1.0.3",
+    "@supabase/supabase-js": "^2.57.0",
+    "express": "^5.1.0"
+  }
+}
